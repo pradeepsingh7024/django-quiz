@@ -1,0 +1,43 @@
+
+
+<nav class="navbar navbar-expand-lg bg-secondary.bg-gradient text-white" style='color:white'>
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">Django-paper</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="{% url 'signup'%}">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'logout' pk=obj1.id %}">logout</a>
+          </li>
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Download</a></li>
+              <li><a class="dropdown-item" href="#">Your profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" >About</a>
+          </li>
+        </ul>
+        
+        <ul type='none' class='nav-item navbar-nav me-auto mb-2 mb-lg-0' id="navbarSupportedContent">
+
+          <li class='nav-link'><a href="#" class='bi bi-person-circle '></a><a href="#" >{{obj1.name}}</a></li>
+        </ul>
+        </form>
+      </div>
+    </div>
+  </nav>

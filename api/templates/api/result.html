@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{%static 'css/result.css'%}">
+</head>
+<body class="container mt-4">
+
+    <h1 class="mb-4">Result Page</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title text-info">question :{{q}} </h2>
+            <h3 class='text-success'>Attempted: {{right}} </h3>
+            <h3 class='text-warning'> Unselected: {{a}} </h3>
+            <h3 class='text-danger'>wrong: {{wrong}}</h3>
+            <ul class="list-group">
+
+                {% comment %} {% for key1,value1 in paper.items %}
+            {{value1.q}}
+            {% endfor %} {% endcomment %}
+                {% for key, value in result.items %}
+                    <li class="list-group-item">{{ key }}: {{ value }}</li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
