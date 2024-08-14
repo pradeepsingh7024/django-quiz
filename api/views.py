@@ -2,6 +2,7 @@ from django.shortcuts import redirect,render
 from .models import Signup
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from django.db.models import Q
 def signupform(request):
     if request.method=='POST':
         u=request.POST.get('username')
@@ -24,9 +25,9 @@ def Login(request):
     if request.method=='POST':
         u=request.POST.get('username')
         p=request.POST.get('password')
- 
-        user = Signup.objects.filter(gmail=u, password=p).first()
-        
+        print(u,p)
+        user = Signup.objects.filter( Q(gmail=u, password=p) | Q(name=u, password=p)).first()
+        print(user)
         if user:    
             u=Signup.objects.get(gmail=u)
             id = u.id
@@ -36,7 +37,8 @@ def Login(request):
            
             print('login sucussfully')
             # return render(request,'api/paper2.html',{'user':u,'mes':'login successfully'})
-            return redirect('paper', pk =id)
+            return redirect(f'/paper/{id}')
+            # return redirect('paper', pk =id)
       
             # return render(request,'login.html',{'mes':"please try again"})
     return render(request,'api/login.html',{'mes':"Signup successfully...."})
@@ -45,11 +47,11 @@ def Login(request):
 
 
 def paper(request, pk):
-
-    obj1 = Signup.objects.get(id = pk)
-    print(obj1.id)
-    print(obj1.name)
-    print(type(obj1))
+    if pk is not None:
+        obj1 = Signup.objects.get(id = pk)
+        print(obj1.id)
+        print(obj1.name)
+        print(type(obj1))
     
     
     paper={ '1':{'q':'Django is a Python-based ____.',"option":['web framework','video creating tool','analysis tool','desktop development platform']},
