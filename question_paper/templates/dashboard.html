@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="text-center mb-4">Welcome, {{ user.username }}!</h2>
+<div class="row">
+  {% for paper in papers %}
+    <div class="col-md-4 mb-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ paper.title }}</h5>
+          <p class="card-text">Created: {{ paper.created_at|date:"M j, Y" }}</p>
+          <a href="{% url 'solve_paper' paper.id %}" class="btn btn-outline-primary mt-auto">Start</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-center">No question papers available.</p>
+  {% endfor %}
+</div>
+{% endblock %}

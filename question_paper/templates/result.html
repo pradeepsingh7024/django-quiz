@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<h2 class="mb-3">Your Results</h2>
+<div class="alert alert-primary">
+  Score: <strong>{{ score }}/{{ answers|length }}</strong>
+</div>
+<div class="list-group">
+  {% for ans in answers %}
+    <div class="list-group-item">
+      <p><strong>Q{{ forloop.counter }}. {{ ans.question.question_text }}</strong></p>
+      <p>Your Answer: <em>{{ ans.answer_text }}</em></p>
+      {% if ans.is_correct %}
+        <span class="badge bg-success">Correct</span>
+      {% elif ans.checked %}
+        <span class="badge bg-danger">Incorrect</span>
+      {% else %}
+        <span class="badge bg-warning text-dark">Pending Review</span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+<a href="{% url 'dashboard' %}" class="btn btn-primary mt-4">Back to Dashboard</a>
+{% endblock %}

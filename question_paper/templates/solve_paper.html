@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Solve: {{ paper.title }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="card shadow p-4">
+    <h2 class="text-center mb-4 text-primary">{{ paper.title }}</h2>
+
+    <form method="post" action="{% url 'submit_answers' paper.id %}">
+      {% csrf_token %}
+
+      {% for question in questions %}
+        <div class="mb-5">
+          <h5 class="mb-3 text-dark">Q{{ forloop.counter }}. {{ question.question_text }}</h5>
+
+          {% if question.question_type == "MCQ" %}
+            <div class="row">
+              {% for opt in question.options %}
+                <div class="form-check col-md-6 mb-2">
+                  <input class="form-check-input" type="radio" name="{{ question.id }}" value="{{ opt }}" id="{{ question.id }}-{{ forloop.counter }}-{{ forloop.counter0 }}">
+                  <label class="form-check-label" for="{{ question.id }}-{{ forloop.counter }}-{{ forloop.counter0 }}">
+                    {{ opt }}
+                  </label>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <textarea class="form-control mt-2" name="{{ question.id }}" rows="3" placeholder="Type your answer here..."></textarea>
+          {% endif %}
+        </div>
+        <hr>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-success btn-lg w-100">
+        <i class="bi bi-check-circle-fill"></i> Submit All Answers
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
